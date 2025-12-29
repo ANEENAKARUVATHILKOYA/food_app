@@ -1,0 +1,16 @@
+.loading {
+    text-align: center;
+    animation: loading 1.2s ease-in-out infinite
+}
+
+@keyframes loading {
+  0%{
+    color: aliceblue;
+  }
+  50%{
+    color: antiquewhite;
+  }
+  100%{
+    color: grey;
+  }
+}
