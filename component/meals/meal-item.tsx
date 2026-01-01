@@ -15,11 +15,14 @@ interface MealItemProps {
 
 
 export default function MealItem({ title, slug, image, summary, creator }: MealItemProps) {
+  
+  const imageUrl = image ? (image.startsWith('/') ? image : '/' + image) : '/images/default.png';
+
   return (
     <article className={classes.meal}>
       <header>
         <div className={classes.image}>
-          <Image src={image} alt={title} fill />
+          <Image src={image && image.startsWith('/') ? image : '/images/default.png'} alt={title} fill />
         </div>
         <div className={classes.headerText}>
           <h2>{title}</h2>
