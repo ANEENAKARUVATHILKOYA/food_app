@@ -3,16 +3,19 @@ import classes from "./page.module.css"
 import { SaveMeal } from "@/data/meals"
 import { redirect } from "next/navigation";
 import MealFormSubmit from "@/component/meals/meal-form-submit"
+import { revalidatePath } from "next/cache";
 
 export default function ShareMealPage(){
 
-   //server validation
+   
+   async function shareMeal(formData:any){
+     "use server"
+
+     //server validation
    function isInvalid(text: string){
       return(text.trim() === "")
    }
 
-   async function shareMeal(formData:any){
-     "use server"
 
      const meal = {
         title: formData.get('title'),
@@ -34,6 +37,7 @@ export default function ShareMealPage(){
      //console.log(meal)
 
      SaveMeal(meal);
+     revalidatePath('/meals',"layout")
      redirect('/meals')
 
    }

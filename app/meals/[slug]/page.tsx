@@ -3,6 +3,25 @@ import classes from "./page.module.css"
 import {getmealDetailes} from "@/data/meals"
 import {notFound} from "next/navigation"
 
+
+export async function generateMetadata({params}: any){      // for dynamic metadata
+    const resolvedParams = await params; 
+    const slug = resolvedParams.slug;
+
+    const meal: any = await getmealDetailes(slug);
+
+    console.log("MEAL FROM DB:", meal)
+
+    if (!meal) {
+    notFound()
+    }
+   
+    return ({
+         title: meal.title,
+         description: meal.description
+       })
+     }
+
 export default  async function mealDetailPage({params}: any){
   const resolvedParams = await params; // unwrap the promise
   const slug = resolvedParams.slug;
